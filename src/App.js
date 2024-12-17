@@ -12,6 +12,9 @@ export default function App() {
 function Counter() {
   const [step, setStep] = useState(1);
   const [count, setCount] = useState(0);
+
+  // we can put random date like this directly into Date() method
+  //and to change the date on the basis of count we use date.setDate(date.getDate()+count) as shown below
   const date = new Date("tue dec 17 2024");
   date.setDate(date.getDate() + count);
 
@@ -42,6 +45,7 @@ function Counter() {
         <button onClick={handleCountInc}>+</button>
       </div>
       <span>
+        {/* here to format the date into a clean looking date we used toDateString() */}
         {count === 0
           ? `Today is ${date.toDateString()}`
           : count >= 1
