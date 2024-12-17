@@ -10,36 +10,44 @@ export default function App() {
 }
 
 function Counter() {
-  const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
-
-  const date = new Date("june 21 2027");
+  const [count, setCount] = useState(0);
+  const date = new Date("tue dec 17 2024");
   date.setDate(date.getDate() + count);
 
+  function handleStepDec() {
+    setStep((step) => step - 1);
+  }
+
+  function handleStepInc() {
+    setStep((step) => step + 1);
+  }
+
+  function handleCountInc() {
+    setCount((count) => count + step);
+  }
+  function handleCountDec() {
+    setCount((count) => count - step);
+  }
   return (
     <div>
       <div>
-        <button onClick={() => setStep((c) => c - 1)}>-</button>
-        <span>Step: {step}</span>
-        <button onClick={() => setStep((c) => c + 1)}>+</button>
+        <button onClick={handleStepDec}>-</button>
+        <span>Step:{step}</span>
+        <button onClick={handleStepInc}>+</button>
       </div>
-
       <div>
-        <button onClick={() => setCount((c) => c - step)}>-</button>
-        <span>Count: {count}</span>
-        <button onClick={() => setCount((c) => c + step)}>+</button>
+        <button onClick={handleCountDec}>-</button>
+        <span>Count:{count}</span>
+        <button onClick={handleCountInc}>+</button>
       </div>
-
-      <p>
-        <span>
-          {count === 0
-            ? "Today is "
-            : count > 0
-            ? `${count} days from today is `
-            : `${Math.abs(count)} days ago was `}
-        </span>
-        <span>{date.toDateString()}</span>
-      </p>
+      <span>
+        {count === 0
+          ? `Today is ${date.toDateString()}`
+          : count >= 1
+          ? `${count} days from today is ${date.toDateString()}`
+          : `${-1 * count} days ago was ${date.toDateString()}`}
+      </span>
     </div>
   );
 }
